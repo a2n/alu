@@ -3,6 +3,9 @@ package alu
 import (
     "log"
     "runtime"
+	"os"
+	"fmt"
+	"path/filepath"
 )
 
 func Caller() string {
@@ -14,10 +17,24 @@ func Caller() string {
     }
 }
 
-func InitLog() {
-    log.SetFlags(log.Lshortfile | log.LstdFlags)
+func InitLog(name string) {
+    log.SetFlags(log.LstdFlags | log.Lshortfile | log.Lmicroseconds)
+
+	if len(name) == 0 {
+		_, file := filepath.Split(os.Args[0])
+		name = file + ".log"
+	}
+
+	f, err := os.OpenFile(name, os.O_APPEND | os.O_WRONLY | os.O_CREATE, 0600)
+	if err != nil {
+		log.Printf("%s has error, %s", Caller(), err.Error())
+		return
+	}
+
+	log.SetOutput(f)
 }
 
 func ResetLog() {
+	log.SetOutput(os.Stdout)
     log.SetFlags(log.LstdFlags)
 }
