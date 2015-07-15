@@ -19,3 +19,5 @@ func main() {
 -   `Caller`
 -   `InitLog`
 -   `ResetLog`
+-   `ToDateString`
+-   `ToDateTimeString`

@@ -37,3 +37,11 @@ func ResetLog() {
 	log.SetOutput(os.Stdout)
     log.SetFlags(log.LstdFlags)
 }
+
+func ToDateString(d *time.Time) {
+    return fmt.Sprintf("%d-%02d-%02d", date.Year(), date.Month(), date.Day())
+}
+
+func ToDateTimeString(d *time.Time) {
+    return fmt.Sprintf("%d-%02d-%02d %02d:%02d:%02d", date.Year(), date.Month(), date.Day(), date.Hour(), date.Minute(), date.Second())
+}
