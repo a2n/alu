@@ -3,8 +3,10 @@ package alu
 import (
     "log"
     "runtime"
-	"os"
-	"path/filepath"
+    "os"
+    "path/filepath"
+    "time"
+    "fmt"
 )
 
 func Caller() string {
@@ -38,10 +40,10 @@ func ResetLog() {
     log.SetFlags(log.LstdFlags)
 }
 
-func ToDateString(d *time.Time) {
+func ToDateString(date *time.Time) string {
     return fmt.Sprintf("%d-%02d-%02d", date.Year(), date.Month(), date.Day())
 }
 
-func ToDateTimeString(d *time.Time) {
+func ToDateTimeString(date *time.Time) string {
     return fmt.Sprintf("%d-%02d-%02d %02d:%02d:%02d", date.Year(), date.Month(), date.Day(), date.Hour(), date.Minute(), date.Second())
 }
