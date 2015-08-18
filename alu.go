@@ -16,9 +16,7 @@ func Caller() string {
     }
 }
 
-func InitLog(name string) {
-    log.SetFlags(log.LstdFlags | log.Lshortfile | log.Lmicroseconds)
-
+func NewLogger(name string) (*log.Logger) {
 	if len(name) == 0 {
 		_, file := filepath.Split(os.Args[0])
 		name = file + ".log"
@@ -26,14 +24,8 @@ func InitLog(name string) {
 
 	f, err := os.OpenFile(name, os.O_APPEND | os.O_WRONLY | os.O_CREATE, 0600)
 	if err != nil {
-		log.Printf("%s has error, %s", Caller(), err.Error())
-		return
+		log.Panicf("%s has error, %s.\n", Caller(), err.Error())
 	}
 
-	log.SetOutput(f)
-}
-
-func ResetLog() {
-	log.SetOutput(os.Stdout)
-    log.SetFlags(log.LstdFlags)
+	return log.New(f, "", log.LstdFlags | log.Lshortfile | log.Lmicroseconds)
 }

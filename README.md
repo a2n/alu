@@ -17,5 +17,4 @@ func main() {
 ## Inventory
 ### Log
 -   `Caller`
--   `InitLog`
--   `ResetLog`
+-   `NewLogger`
