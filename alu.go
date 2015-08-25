@@ -33,9 +33,15 @@ func NewLogger(name string) (*log.Logger) {
 }
 
 func ToDateString(date *time.Time) string {
+	if date == nil {
+		return ""
+	}
     return fmt.Sprintf("%d-%02d-%02d", date.Year(), date.Month(), date.Day())
 }
 
 func ToDateTimeString(date *time.Time) string {
+	if date == nil {
+		return ""
+	}
     return fmt.Sprintf("%d-%02d-%02d %02d:%02d:%02d", date.Year(), date.Month(), date.Day(), date.Hour(), date.Minute(), date.Second())
 }
