@@ -45,3 +45,30 @@ func ToDateTimeString(date *time.Time) string {
 	}
     return fmt.Sprintf("%d-%02d-%02d %02d:%02d:%02d", date.Year(), date.Month(), date.Day(), date.Hour(), date.Minute(), date.Second())
 }
+
+func EasyDate(d time.Time) (string) {
+	twZone, err := time.LoadLocation("Asia/Taipei")
+	if err != nil {
+		errLog.Print(err.Error())
+		return ""
+	}
+
+	now := time.Now().In(twZone)
+	today := time.Date(now.Year(), now.Month(), now.Day(), 0, 0, 0, 0, twZone)
+	this_year := time.Date(now.Year(), time.January, 1, 0, 0, 0, 0, twZone)
+	yesterday := today.Add(-24 * time.Hour)
+	twoDaysBefore := yesterday.Add(-24 * time.Hour)
+
+	str := fmt.Sprintf("%02d:%02d:%02d", d.Hour(), d.Minute(), d.Second())
+	if d.After(yesterday) && d.Before(today) {
+		str = "昨天 " + str
+	} else if d.After(twoDaysBefore) && d.Before(yesterday) {
+		str = "前天 " + str
+	} else if d.After(this_year) && d.Before(twoDaysBefore) {
+		str = fmt.Sprintf("%d 月 %d 日 ", d.Month(), d.Day()) + str
+	} else if d.Before(this_year) {
+		str = fmt.Sprintf("%02d-%02d-%02d ", d.Year() - 1911, d.Month(), d.Day()) + str
+	}
+
+	return str
+}

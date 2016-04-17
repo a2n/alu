@@ -17,6 +17,8 @@ func main() {
 ## Inventory
 ### Log
 -   `Caller`
+-   `NewLogger`
+### Date time
 -   `ToDateString`
 -   `ToDateTimeString`
--   `NewLogger`
+-   `EasyDate`
