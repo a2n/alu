@@ -49,7 +49,7 @@ func ToDateTimeString(date *time.Time) string {
 func EasyDate(d time.Time) (string) {
 	twZone, err := time.LoadLocation("Asia/Taipei")
 	if err != nil {
-		errLog.Print(err.Error())
+		log.Print(err.Error())
 		return ""
 	}
 
